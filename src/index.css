@@ -510,6 +510,101 @@ a { text-decoration: none; color: inherit; }
   color: #fff;
 }
 
+/* ── Frozen card state ───────────────────────── */
+.attendance-card.status-frozen {
+  border-left: 3px solid var(--color-text-3);
+  opacity: 0.7;
+  background: var(--color-surface-2);
+}
+
+.attendance-card.status-frozen:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.status-frozen .card-progress-fill {
+  background: var(--color-text-3);
+}
+
+.status-frozen .card-pct {
+  color: var(--color-text-3);
+}
+
+.card-frozen-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-3);
+  letter-spacing: 0.03em;
+}
+
+/* ── Section title muted ─────────────────────── */
+.section-title--muted {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-3);
+}
+
+/* ── Freeze / reactivate action buttons ──────── */
+.card-action-btn--freeze:hover {
+  background: #eff6ff;
+  color: #2563eb;
+  border-color: #93c5fd;
+}
+
+.card-action-btn--reactivate:hover {
+  background: var(--color-safe-bg);
+  color: var(--color-safe);
+  border-color: var(--color-safe-border);
+}
+
+/* ── Freeze button (modal) ───────────────────── */
+.btn-freeze {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn-freeze:hover:not(:disabled) {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.btn-freeze:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Confirm icon wrap ───────────────────────── */
+.confirm-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 4px;
+}
+
+.confirm-icon-wrap--freeze {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
 /* ── Login Page ─────────────────────────────── */
 .login-page {
   min-height: 100vh;

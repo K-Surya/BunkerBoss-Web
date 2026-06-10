@@ -5,6 +5,7 @@ export interface Subject {
   attended: number;
   total: number;
   percentage: number;
+  active: boolean;
 }
 
 export interface AttendanceLog {
@@ -16,5 +17,8 @@ export interface AttendanceLog {
 
 export interface UserProfile {
   email: string;
-  displayName?: string;
+  id?: number;
+  name?: string;
+  reg?: number;
+  department?: string;
 }

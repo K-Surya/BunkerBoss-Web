@@ -5,7 +5,6 @@ import { loginWithEmail, registerWithEmail } from "../services/authService";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,11 +17,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      if (mode === "login") {
-        await loginWithEmail(email, password);
-      } else {
-        await registerWithEmail(email, password);
-      }
+      await loginWithEmail(email, password);
       navigate("/");
     } catch (err: unknown) {
       const msg =
@@ -57,23 +52,6 @@ const Login = () => {
 
         <p className="login-tagline">Track your attendance, ace your semester.</p>
 
-        {/* Tab switcher */}
-        <div className="login-tabs">
-          <button
-            className={`login-tab ${mode === "login" ? "login-tab--active" : ""}`}
-            onClick={() => { setMode("login"); setError(""); }}
-            type="button"
-          >
-            Sign In
-          </button>
-          <button
-            className={`login-tab ${mode === "register" ? "login-tab--active" : ""}`}
-            onClick={() => { setMode("register"); setError(""); }}
-            type="button"
-          >
-            Create Account
-          </button>
-        </div>
 
         <form onSubmit={handleSubmit} className="login-form" noValidate>
           {/* Email */}
@@ -103,11 +81,11 @@ const Login = () => {
                 id="password"
                 type={showPassword ? "text" : "password"}
                 className="input-field input-field--padded-right"
-                placeholder={mode === "register" ? "Min. 6 characters" : "Your password"}
+                placeholder="Your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                autoComplete={mode === "login" ? "current-password" : "new-password"}
+                autoComplete="current-password"
               />
               <button
                 type="button"
@@ -130,11 +108,7 @@ const Login = () => {
             className="btn-primary"
             disabled={loading}
           >
-            {loading
-              ? "Please wait…"
-              : mode === "login"
-              ? "Sign In"
-              : "Create Account"}
+            {loading ? "Please wait…" : "Sign In"}
           </button>
         </form>
       </div>

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   User,
@@ -8,9 +8,10 @@ import {
   CheckCircle2,
   AlertTriangle,
   ArrowLeft,
-  BookOpen,
-  BarChart3,
   ShieldCheck,
+  Hash,
+  Building2,
+  BadgeCheck
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { logout } from "../services/authService";
@@ -20,6 +21,8 @@ import {
   EmailAuthProvider,
 } from "firebase/auth";
 import { auth } from "../services/firebaseConfig";
+import { fetchUserProfile } from "../services/dbService";
+import type { UserProfile } from "../types";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -32,6 +35,14 @@ const Profile = () => {
   const [pwdLoading, setPwdLoading] = useState(false);
   const [pwdError, setPwdError] = useState("");
   const [pwdSuccess, setPwdSuccess] = useState(false);
+
+  const [dbUser, setDbUser] = useState<UserProfile | null>(null);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchUserProfile(user.email).then(setDbUser).catch(console.error);
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     await logout();
@@ -120,19 +131,28 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Quick stats */}
-          <div className="profile-stats-grid">
-            <div className="profile-stat">
-              <BookOpen size={18} className="profile-stat-icon" />
-              <span className="profile-stat-label">Subjects</span>
-              <span className="profile-stat-hint">View on Dashboard</span>
+          {dbUser && (
+            <div className="profile-card">
+              <div className="profile-info">
+                <div className="profile-info-row">
+                  <User size={15} className="profile-info-icon" />
+                  <span className="profile-info-value"><strong>Name:</strong> {dbUser.name || "N/A"}</span>
+                </div>
+                <div className="profile-info-row">
+                  <Hash size={15} className="profile-info-icon" />
+                  <span className="profile-info-value"><strong>Id Number:</strong> {dbUser.id || "N/A"}</span>
+                </div>
+                <div className="profile-info-row">
+                  <BadgeCheck size={15} className="profile-info-icon" />
+                  <span className="profile-info-value"><strong>Registration Number:</strong> {dbUser.reg || "N/A"}</span>
+                </div>
+                <div className="profile-info-row">
+                  <Building2 size={15} className="profile-info-icon" />
+                  <span className="profile-info-value"><strong>Department:</strong> {dbUser.department || "N/A"}</span>
+                </div>
+              </div>
             </div>
-            <div className="profile-stat">
-              <BarChart3 size={18} className="profile-stat-icon" />
-              <span className="profile-stat-label">Reports</span>
-              <span className="profile-stat-hint">Export from each subject</span>
-            </div>
-          </div>
+          )}
 
           {/* Sign out */}
           <button className="btn-danger btn-full" onClick={handleLogout}>

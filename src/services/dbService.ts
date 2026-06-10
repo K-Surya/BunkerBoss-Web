@@ -11,7 +11,7 @@ import {
   increment,
 } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import type { Subject, AttendanceLog } from "../types";
+import type { Subject, AttendanceLog, UserProfile } from "../types";
 
 // ── Helpers ──────────────────────────────────────────────────
 
@@ -27,6 +27,7 @@ const parseSubject = (docSnap: { id: string; data: () => Record<string, unknown>
     attended,
     total,
     percentage,
+    active: data.active !== false, // defaults to true for existing docs
   };
 };
 
@@ -176,6 +177,26 @@ export const undoLastAttendance = async (
   await Promise.all(promises);
 };
 
+// ── FREEZE / REACTIVATE ──────────────────────────────────────
+
+/** Freeze a subject — sets active=false, attendance can no longer be marked */
+export const freezeSubject = async (
+  email: string,
+  subjectId: string
+): Promise<void> => {
+  const docRef = doc(db, "users", email, "subjects", subjectId);
+  await updateDoc(docRef, { active: false });
+};
+
+/** Reactivate a frozen subject — sets active=true */
+export const reactivateSubject = async (
+  email: string,
+  subjectId: string
+): Promise<void> => {
+  const docRef = doc(db, "users", email, "subjects", subjectId);
+  await updateDoc(docRef, { active: true });
+};
+
 // ── DELETE ───────────────────────────────────────────────────
 
 /** Delete a subject and its user document entry (does NOT cascade sub-collections on the client) */
@@ -196,4 +217,12 @@ export const ensureUserDocument = async (email: string): Promise<void> => {
   if (!snap.exists()) {
     await setDoc(userRef, { email, createdAt: Timestamp.now() });
   }
+};
+
+/** Fetch user document fields */
+export const fetchUserProfile = async (email: string): Promise<UserProfile | null> => {
+  const userRef = doc(db, "users", email);
+  const snap = await getDoc(userRef);
+  if (!snap.exists()) return null;
+  return { email, ...snap.data() } as UserProfile;
 };

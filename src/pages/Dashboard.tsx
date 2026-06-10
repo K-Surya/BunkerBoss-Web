@@ -119,11 +119,13 @@ const Dashboard = () => {
   const loadAll = useCallback(async () => {
     if (!user?.email) return;
     const data = await fetchSubjects(user.email);
-    setSubjects(data);
+    // Only keep active subjects for the dashboard
+    const active = data.filter((s) => s.active);
+    setSubjects(active);
 
-    // Fetch latest log for each subject in parallel
+    // Fetch latest log for each active subject in parallel
     const entries = await Promise.all(
-      data.map(async (s) => {
+      active.map(async (s) => {
         try {
           const logs = await fetchAttendanceLogs(user.email!, s.id);
           const sorted = logs.sort((a, b) => {
@@ -310,7 +312,7 @@ const Dashboard = () => {
           {subjects.length === 0 ? (
             <div className="empty-state">
               <BookOpen size={40} />
-              <p>No subjects yet. Add your first one!</p>
+              <p>No active subjects. Add one or check the Subjects tab for frozen ones.</p>
               <button className="btn-primary btn-primary--sm" onClick={() => setAddOpen(true)}>
                 <Plus size={15} /> Add Subject
               </button>
