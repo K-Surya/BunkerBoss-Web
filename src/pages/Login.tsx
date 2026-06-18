@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, Eye, EyeOff, Mail, Lock } from "lucide-react";
-import { loginWithEmail, registerWithEmail } from "../services/authService";
+import { loginWithEmail } from "../services/authService";
 
 const Login = () => {
   const navigate = useNavigate();

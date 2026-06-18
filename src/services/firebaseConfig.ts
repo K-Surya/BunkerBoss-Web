@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const appCheck = initializeAppCheck(app, {
+void initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('BunkerBoss2026'),
   isTokenAutoRefreshEnabled: true
 });

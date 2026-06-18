@@ -371,7 +371,7 @@ const Dashboard = () => {
                     strokeWidth={2}
                   />
                   <Tooltip
-                    formatter={(value: number) => [`${value}%`, "Attendance"]}
+                    formatter={(value) => [`${value ?? 0}%`, "Attendance"]}
                     contentStyle={{
                       background: "#fff",
                       border: "1px solid #e5e7eb",
