@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type ReactElement } from "react";
 import { History, AlertTriangle, CheckCircle2, XCircle, MinusCircle, Search } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { fetchSubjects, fetchAttendanceLogs } from "../services/dbService";
@@ -15,7 +15,7 @@ interface HistoryEntry {
 }
 
 // ── Helpers ───────────────────────────────────────────────────
-const statusMeta: Record<string, { label: string; className: string; icon: JSX.Element }> = {
+const statusMeta: Record<string, { label: string; className: string; icon: ReactElement }> = {
   present: {
     label: "Present",
     className: "history-badge history-badge--present",
