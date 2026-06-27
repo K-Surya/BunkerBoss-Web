@@ -1,8 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyBHUq3xsYvKlcNe6vfYpN5ZkuG5lTC3_eM",
@@ -15,11 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-void initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('BunkerBoss2026'),
-  isTokenAutoRefreshEnabled: true
-});
 
 export const db = getFirestore(app);
 export const auth = getAuth(app);

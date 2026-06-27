@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Subjects from "./pages/Subjects";
 import Profile from "./pages/Profile";
+import HistoryPage from "./pages/HistoryPage";
 
 function App() {
   return (
@@ -37,6 +38,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Layout><Profile /></Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <ProtectedRoute>
+                <Layout><HistoryPage /></Layout>
               </ProtectedRoute>
             }
           />

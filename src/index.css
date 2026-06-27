@@ -1067,6 +1067,155 @@ a { text-decoration: none; color: inherit; }
   color: inherit;
 }
 
+/* ── History Page ────────────────────────────── */
+.history-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.search-bar-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-3);
+  pointer-events: none;
+}
+
+.search-bar--icon {
+  padding-left: 36px;
+}
+
+.history-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.history-group {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.history-date-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.history-date-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-2);
+  letter-spacing: 0.01em;
+}
+
+.history-date-count {
+  font-size: 12px;
+  color: var(--color-text-3);
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  gap: 12px;
+  transition: background 0.12s;
+}
+
+.history-row:not(:last-child) {
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.history-row:hover {
+  background: var(--color-surface-2);
+}
+
+.history-row-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.history-subject {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.history-subject-code {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.history-subject-name {
+  font-size: 12px;
+  color: var(--color-text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-time {
+  font-size: 12px;
+  color: var(--color-text-3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── History status badges ───────────────────── */
+.history-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.history-badge--present {
+  background: var(--color-safe-bg);
+  color: var(--color-safe);
+  border: 1px solid var(--color-safe-border);
+}
+
+.history-badge--absent {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger-border);
+}
+
+.history-badge--cancelled {
+  background: var(--color-warn-bg);
+  color: var(--color-warn);
+  border: 1px solid var(--color-warn-border);
+}
+
 /* ── Mobile top bar ──────────────────────────── */
 .topbar {
   display: none;                       /* hidden on desktop */

@@ -61,12 +61,15 @@ export const fetchAttendanceLogs = async (
     let date = data.date ?? "";
     if (date instanceof Timestamp) {
       date = date.toDate().toISOString();
+    } else if (typeof date === "object" && date !== null && "toDate" in date) {
+      // Handle Firestore Timestamp that wasn't caught by instanceof (cross-frame)
+      date = (date as Timestamp).toDate().toISOString();
     }
     return {
+      ...data,              // spread first so explicit fields override
       id: docSnap.id,
-      date: String(date),
+      date: String(date),  // always the converted ISO string
       status: String(data.status ?? ""),
-      ...data,
     } as AttendanceLog;
   });
 };

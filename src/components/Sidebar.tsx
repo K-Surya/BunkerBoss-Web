@@ -1,11 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutDashboard, BookOpen, LogOut, GraduationCap, X } from "lucide-react";
+import { LayoutDashboard, BookOpen, LogOut, GraduationCap, X, History } from "lucide-react";
 import { logout } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
 
 const navItems = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
   { to: "/subjects", label: "Subjects", icon: BookOpen },
+  { to: "/history", label: "History", icon: History },
 ];
 
 interface SidebarProps {
